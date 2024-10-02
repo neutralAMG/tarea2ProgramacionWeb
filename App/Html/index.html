@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <form class="form">
+        <div class="inputCollection">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" />
+          <label for="title">Profecion</label>
+          <input type="text" id="title" name="title" />
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" />
+          <label for="phone">Phone</label>
+          <input type="text" id="phone" name="phone" />
+          <label for="bithDate">Birth Date</label>
+          <input type="date" id="bithDate" name="bithDate" />
+          <label for="linkedinLink">Linkedin link</label>
+          <input type="url" id="linkedinLink" name="linkedinLink" />
+        </div>
+
+        <div class="inputCollection">
+          <label>Skill's</label>
+          <div class="skills">
+            <input type="text" id="skill" name="skill" />
+            <select name="skillLevel" id="skillLevel">
+              <option value="">Level</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <button class="AddSkill">+</button>
+        </div>
+
+        <div class="inputCollection">
+          <label>Software</label>
+          <div class="Softwares">
+            <input type="text" id="software" name="software" />
+            <select name="softwareLevel" id="softwareLevel">
+              <option value="">Level</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <button class="AddSoftware">+</button>
+        </div>
+
+        <div class="inputCollection">
+          <label>language</label>
+          <div class="Languages">
+            <input type="text" id="language" name="language" />
+            <select name="languageLevel" id="languageLevel">
+              <option value="">Level</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <button class="AddLanguage">+</button>
+        </div>
+
+        <div class="inputCollection">
+          <label for="summary">Carrer summary</label>
+          <textarea id="summary" name="summary"></textarea>
+        </div>
+
+        <div class="inputCollection">
+          <label>Experiance</label>
+          <div class="Experiances">
+            <input type="text" id="experiance" name="experiance" />
+            <input type="date" id="begin" name="begin" />
+            <input type="date" id="end" name="end" />
+          </div>
+          <button class="AddExperiance">+</button>
+        </div>
+
+        <div class="inputCollection">
+          <label>Education</label>
+          <div class="Educations">
+            <input type="text" id="education" name="education" />
+            <input type="date" id="begin" name="begin" />
+            <input type="date" id="end" name="end" />
+          </div>
+          <button class="AddEducation">+</button>
+        </div>
+
+        <div class="inputCollection">
+          <label>Certification</label>
+          <div class="Certifications">
+            <input type="text" id="certification" name="certification" />
+            <input type="date" id="begin" name="begin" />
+            <input type="date" id="end" name="end" />
+          </div>
+          <button class="AddCertification">+</button>
+        </div>
+
+        <button type="submit">Create cv</button>
+      </form>
+    </div>
+    <script src="/App/js/index.js"></script>
+  </body>
+</html>
