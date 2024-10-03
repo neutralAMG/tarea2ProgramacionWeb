@@ -28,6 +28,16 @@ addSkillInputBtn.addEventListener("click", (e)=>{
     input.className += " form-control"
     input.placeholder = "Skill"
 
+    const deleteBtn = document.createElement("button")
+    deleteBtn.className = "btn"
+    deleteBtn.className +=" btn-danger"
+    deleteBtn.textContent = "Delete"
+    deleteBtn.addEventListener("click", (e) =>{
+        e.preventDefault();
+
+        div.remove();
+    })
+
     const select = document.createElement("select");
     select.name = "skillLevel";
     select.id = "skillLevel";
@@ -63,6 +73,7 @@ addSkillInputBtn.addEventListener("click", (e)=>{
 
     div.appendChild(input);
     div.appendChild(select);
+    div.appendChild(deleteBtn)
 
     SkillsColection.appendChild(div)
 })
@@ -82,6 +93,16 @@ addSoftwareInputBtn.addEventListener("click", (e) =>{
     input.className = "software"
     input.className += " form-control"
     input.placeholder = "Software"
+
+    const deleteBtn = document.createElement("button")
+    deleteBtn.className = "btn"
+    deleteBtn.className +=" btn-danger"
+    deleteBtn.textContent = "Delete"
+    deleteBtn.addEventListener("click", (e) =>{
+        e.preventDefault();
+
+        div.remove();
+    })
 
     const select = document.createElement("select");
     select.name = "softwareLevel";
@@ -118,6 +139,7 @@ addSoftwareInputBtn.addEventListener("click", (e) =>{
 
     div.appendChild(input);
     div.appendChild(select);
+    div.appendChild(deleteBtn)
 
     SoftwareColection.appendChild(div)
 })
@@ -137,6 +159,16 @@ addLanguageInputBtn.addEventListener("click", (e) =>{
     input.className = "language"
     input.className += " form-control"
     input.placeholder = "Language"
+
+    const deleteBtn = document.createElement("button")
+    deleteBtn.className = "btn"
+    deleteBtn.className +=" btn-danger"
+    deleteBtn.textContent = "Delete"
+    deleteBtn.addEventListener("click", (e) =>{
+        e.preventDefault();
+
+        div.remove();
+    })
 
     const select = document.createElement("select");
     select.name = "languageLevel";
@@ -173,6 +205,7 @@ addLanguageInputBtn.addEventListener("click", (e) =>{
 
     div.appendChild(input);
     div.appendChild(select);
+    div.appendChild(deleteBtn)
 
     LanguageColection.appendChild(div)
 })
@@ -192,6 +225,16 @@ addExperianceInputBtn.addEventListener("click", (e) => {
     input.className += " form-control"
     input.placeholder = "Experience"
 
+    const deleteBtn = document.createElement("button")
+    deleteBtn.className = "btn"
+    deleteBtn.className +=" btn-danger"
+    deleteBtn.textContent = "Delete"
+    deleteBtn.addEventListener("click", (e) =>{
+        e.preventDefault();
+
+        div.remove();
+    })
+
     const beginDate = document.createElement("input");
     beginDate.type = "date";
     beginDate.name = "begin";
@@ -207,6 +250,7 @@ addExperianceInputBtn.addEventListener("click", (e) => {
     div.appendChild(input);
     div.appendChild(beginDate);
     div.appendChild(endDate);
+    div.appendChild(deleteBtn)
 
     ExperianceColection.appendChild(div)
 })
@@ -226,6 +270,16 @@ addEducationInputBtn.addEventListener("click", (e) =>{
     input.className += " form-control"
     input.placeholder = "Education"
 
+    const deleteBtn = document.createElement("button")
+    deleteBtn.className = "btn"
+    deleteBtn.className +=" btn-danger"
+    deleteBtn.textContent = "Delete"
+    deleteBtn.addEventListener("click", (e) =>{
+        e.preventDefault();
+
+        div.remove();
+    })
+
     const beginDate = document.createElement("input");
     beginDate.type = "date";
     beginDate.name = "begin";
@@ -241,6 +295,7 @@ addEducationInputBtn.addEventListener("click", (e) =>{
     div.appendChild(input);
     div.appendChild(beginDate);
     div.appendChild(endDate);
+    div.appendChild(deleteBtn)
 
     EducationColection.appendChild(div)
 })
@@ -260,6 +315,16 @@ addCertificationInputBtn.addEventListener("click", (e) =>{
     input.className += " form-control"
     input.placeholder = "Certification"
 
+    const deleteBtn = document.createElement("button")
+    deleteBtn.className = "btn"
+    deleteBtn.className +=" btn-danger"
+    deleteBtn.textContent = "Delete"
+    deleteBtn.addEventListener("click", (e) =>{
+        e.preventDefault();
+
+        div.remove();
+    })
+
     const beginDate = document.createElement("input");
     beginDate.type = "date";
     beginDate.name = "begin";
@@ -275,6 +340,7 @@ addCertificationInputBtn.addEventListener("click", (e) =>{
     div.appendChild(input);
     div.appendChild(beginDate);
     div.appendChild(endDate);
+    div.appendChild(deleteBtn)
 
     CertificationColection.appendChild(div)
 })
@@ -339,7 +405,56 @@ form.addEventListener("submit", (e) =>{
     }
 
     generateCV(dataToUse)
+
+    const newCvBtn = document.createElement("button");
+    const newEditBtn = document.querySelector(".submitButton")
+
+
+    newCvBtn.classList.add("btn", "btn-info", "newCvBtn");
+    newCvBtn.addEventListener("click", (e) =>{
+        e.preventDefault()
+        newCvBtn.remove()
+        newEditBtn.textContent = "Create CV"
+
+        for(let i = 1; i< inputCollection.children.length; i +=2){
+            inputCollection.children[i].value = "";
+        }
+        carrerSummary.value ="";
+
+        resetFormFields(inputCollection, carrerSummary, skillInputs, softwareInputs, languageInputs, experiencesInputs, educationsInputs, certificationsInputs);
+    })
+    newCvBtn.textContent = "New CV"
+    
+    newEditBtn.textContent = "Edit CV"
+
+    
+    if (!form.contains(newCvBtn)) {
+       form.append(newCvBtn)
+    }
+    
 })
+
+function resetFormFields(inputCollection, carrerSummary, ...inputGroups) {
+    for (let i = 1; i < inputCollection.children.length; i += 2) {
+        inputCollection.children[i].value = "";
+    }
+    carrerSummary.value = "";
+
+    inputGroups.forEach((group) => {
+        resetDynamicInputs(group);
+    });
+}
+
+// Helper function to reset dynamic input groups
+function resetDynamicInputs(inputGroup) {
+    inputGroup[0].children[0].value = "";
+    inputGroup[0].children[1].value = "";
+
+    for (let i = 1; i < inputGroup.length; i++) {
+        inputGroup[i].remove();
+    }
+}
+
 
 function generateCV(data) {
     // Clear previous CV if exists
@@ -347,111 +462,157 @@ function generateCV(data) {
     while (cvContainer.firstChild) {
         cvContainer.removeChild(cvContainer.firstChild); // Clear existing CV content
     }
+    
 
-    // Create elements for the CV
-    const nameElement = document.createElement("h2");
+    // Create CV container elements with Bootstrap classes
+    const cvWrapper = document.createElement("div");
+    cvWrapper.classList.add("container", "mt-4", "p-4", "border", "rounded", "shadow-sm", "bg-light");
+
+    const headerSection = document.createElement("div");
+    headerSection.classList.add("text-center", "mb-4");
+
+    const nameElement = document.createElement("h1");
     nameElement.textContent = data.name;
+    nameElement.classList.add("display-4", "fw-bold");
 
-    const professionElement = document.createElement("h3");
+    const professionElement = document.createElement("h2");
     professionElement.textContent = data.profession;
+    professionElement.classList.add("h4", "text-secondary");
 
-    const contactElement = document.createElement("p");
+    const contactElement = document.createElement("div");
+    contactElement.classList.add("mt-3", "text-muted");
+
     const emailLink = document.createElement("a");
     emailLink.href = `mailto:${data.email}`;
     emailLink.textContent = data.email;
-    contactElement.appendChild(document.createTextNode("Email: "));
-    contactElement.appendChild(emailLink);
-    contactElement.appendChild(document.createElement("br"));
-    contactElement.appendChild(document.createTextNode(`Phone: ${data.phone}`));
-    contactElement.appendChild(document.createElement("br"));
-    contactElement.appendChild(document.createTextNode(`Birth Date: ${data.birthDate}`));
-    contactElement.appendChild(document.createElement("br"));
+
     const linkedinLink = document.createElement("a");
     linkedinLink.href = data.linkedinLink;
     linkedinLink.target = "_blank";
-    linkedinLink.textContent = data.linkedinLink;
-    contactElement.appendChild(document.createTextNode("LinkedIn: "));
-    contactElement.appendChild(linkedinLink);
+    linkedinLink.textContent = "LinkedIn";
+    linkedinLink.classList.add("text-decoration-none");
 
-    const summaryElement = document.createElement("h4");
-    summaryElement.textContent = "Career Summary";
-    const summaryText = document.createElement("p");
-    summaryText.textContent = data.careerSummary;
+    contactElement.innerHTML = `
+        <p>Email: ${emailLink.outerHTML}</p>
+        <p>Phone: ${data.phone}</p>
+        <p>Birth Date: ${data.birthDate}</p>
+        <p>LinkedIn: ${linkedinLink.outerHTML}</p>
+    `;
 
-    const skillsElement = document.createElement("h4");
-    skillsElement.textContent = "Skills";
+    headerSection.appendChild(nameElement);
+    headerSection.appendChild(professionElement);
+    headerSection.appendChild(contactElement);
+
+    const contentSection = document.createElement("div");
+    contentSection.classList.add("cv-content");
+
+    // Summary section
+    const summaryElement = document.createElement("div");
+    summaryElement.classList.add("mb-4");
+    summaryElement.innerHTML = `
+        <h3 class="h5 border-bottom pb-2">Career Summary</h3>
+        <p>${data.careerSummary}</p>
+    `;
+
+    // Skills section
+    const skillsElement = document.createElement("div");
+    skillsElement.classList.add("mb-4");
+    skillsElement.innerHTML = `<h3 class="h5 border-bottom pb-2">Skills</h3>`;
     const skillsList = document.createElement("ul");
+    skillsList.classList.add("list-group");
     data.skills.forEach(skill => {
         const skillItem = document.createElement("li");
+        skillItem.classList.add("list-group-item");
         skillItem.textContent = `${skill.name} (Level: ${skill.level})`;
         skillsList.appendChild(skillItem);
     });
+    skillsElement.appendChild(skillsList);
 
-    const softwareElement = document.createElement("h4");
-    softwareElement.textContent = "Software Proficiency";
+    // Software section
+    const softwareElement = document.createElement("div");
+    softwareElement.classList.add("mb-4");
+    softwareElement.innerHTML = `<h3 class="h5 border-bottom pb-2">Software Proficiency</h3>`;
     const softwareList = document.createElement("ul");
+    softwareList.classList.add("list-group");
     data.softwares.forEach(software => {
         const softwareItem = document.createElement("li");
+        softwareItem.classList.add("list-group-item");
         softwareItem.textContent = `${software.name} (Level: ${software.level})`;
         softwareList.appendChild(softwareItem);
     });
+    softwareElement.appendChild(softwareList);
 
-    const languagesElement = document.createElement("h4");
-    languagesElement.textContent = "Languages";
+    // Languages section
+    const languagesElement = document.createElement("div");
+    languagesElement.classList.add("mb-4");
+    languagesElement.innerHTML = `<h3 class="h5 border-bottom pb-2">Languages</h3>`;
     const languagesList = document.createElement("ul");
-
+    languagesList.classList.add("list-group");
     data.languages.forEach(language => {
         const languageItem = document.createElement("li");
+        languageItem.classList.add("list-group-item");
         languageItem.textContent = `${language.name} (Level: ${language.level})`;
         languagesList.appendChild(languageItem);
     });
+    languagesElement.appendChild(languagesList);
 
-    const experiencesElement = document.createElement("h4");
-    experiencesElement.textContent = "Experiences";
+    // Experiences section
+    const experiencesElement = document.createElement("div");
+    experiencesElement.classList.add("mb-4");
+    experiencesElement.innerHTML = `<h3 class="h5 border-bottom pb-2">Experiences</h3>`;
     const experiencesList = document.createElement("ul");
+    experiencesList.classList.add("list-group");
     data.experiances.forEach(experience => {
         const experienceItem = document.createElement("li");
+        experienceItem.classList.add("list-group-item");
         experienceItem.textContent = `${experience.name} (${experience.beginDate} - ${experience.endDate})`;
         experiencesList.appendChild(experienceItem);
     });
+    experiencesElement.appendChild(experiencesList);
 
-    const educationsElement = document.createElement("h4");
-    educationsElement.textContent = "Education";
+    // Education section
+    const educationsElement = document.createElement("div");
+    educationsElement.classList.add("mb-4");
+    educationsElement.innerHTML = `<h3 class="h5 border-bottom pb-2">Education</h3>`;
     const educationsList = document.createElement("ul");
+    educationsList.classList.add("list-group");
     data.educations.forEach(education => {
         const educationItem = document.createElement("li");
+        educationItem.classList.add("list-group-item");
         educationItem.textContent = `${education.name} (${education.beginDate} - ${education.endDate})`;
         educationsList.appendChild(educationItem);
     });
+    educationsElement.appendChild(educationsList);
 
-    const certificationsElement = document.createElement("h4");
-    certificationsElement.textContent = "Certifications";
+    // Certifications section
+    const certificationsElement = document.createElement("div");
+    certificationsElement.classList.add("mb-4");
+    certificationsElement.innerHTML = `<h3 class="h5 border-bottom pb-2">Certifications</h3>`;
     const certificationsList = document.createElement("ul");
+    certificationsList.classList.add("list-group");
     data.certifications.forEach(certification => {
         const certificationItem = document.createElement("li");
+        certificationItem.classList.add("list-group-item");
         certificationItem.textContent = `${certification.name} (${certification.beginDate} - ${certification.endDate})`;
         certificationsList.appendChild(certificationItem);
     });
+    certificationsElement.appendChild(certificationsList);
 
-    // Append all elements to the CV container
-    cvContainer.appendChild(nameElement);
-    cvContainer.appendChild(professionElement);
-    cvContainer.appendChild(contactElement);
-    cvContainer.appendChild(summaryElement);
-    cvContainer.appendChild(summaryText);
-    cvContainer.appendChild(skillsElement);
-    cvContainer.appendChild(skillsList);
-    cvContainer.appendChild(softwareElement);
-    cvContainer.appendChild(softwareList);
-    cvContainer.appendChild(languagesElement);
-    cvContainer.appendChild(languagesList);
-    cvContainer.appendChild(experiencesElement);
-    cvContainer.appendChild(experiencesList);
-    cvContainer.appendChild(educationsElement);
-    cvContainer.appendChild(educationsList);
-    cvContainer.appendChild(certificationsElement);
-    cvContainer.appendChild(certificationsList);
+    // Append sections to the content section
+    contentSection.appendChild(summaryElement);
+    contentSection.appendChild(skillsElement);
+    contentSection.appendChild(softwareElement);
+    contentSection.appendChild(languagesElement);
+    contentSection.appendChild(experiencesElement);
+    contentSection.appendChild(educationsElement);
+    contentSection.appendChild(certificationsElement);
+
+    // Append all to the main CV container
+    cvWrapper.appendChild(headerSection);
+    cvWrapper.appendChild(contentSection);
+    cvContainer.appendChild(cvWrapper);
 }
+
 function validate(input){
     input.style.borderWidth = "2px"
 if(input.value === undefined || input.value === "" || input.value === null || input.value === " ") {
@@ -491,4 +652,8 @@ function iterateThroughSecondTreeDinamicInputs(inputs){
         validate(inputs[i].children[1])
         validate(inputs[i].children[2])
     }
+}
+
+function clear(){
+    
 }
